@@ -1,7 +1,7 @@
 <?php
 namespace Impl;
 
-class ApplicationUserImpl {
+class ApplicationUserImpl implements \Rds\IEntityImpl {
   public function limit()
   {
     return 150;
