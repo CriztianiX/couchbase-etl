@@ -1,11 +1,10 @@
 <?php
 namespace Rds {
     class CouchbaseConnection  {
-        public static function getBucketConnection()
+        public static function getBucketConnection($config)
         {
-          $config = Configuration::getInstance();
-          $cluster = new \CouchbaseCluster($config->couchbase("connectionString"));
-          return $cluster->openBucket($config->couchbase("bucket"));
+          $cluster = new \CouchbaseCluster($config["connectionString"]);
+          return $cluster->openBucket($config["bucket"]);
         }
     }
 }

@@ -8,9 +8,10 @@ namespace Rds {
     }
     public function run()
     {
-      $boot = Bootstrap::getInstace();
+      $config = $this->worker->config;
+      $boot = Bootstrap::getInstace($config);
       $rows = $boot->getPage($this->page);
-      $bucket = \Rds\CouchbaseConnection::getBucketConnection();
+      $bucket = \Rds\CouchbaseConnection::getBucketConnection($config["couchbase"]);
 
       foreach ($rows as $row) {
         $adaptedResult = $boot->adaptResult($row);

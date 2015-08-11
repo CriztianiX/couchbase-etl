@@ -2,13 +2,12 @@
 namespace Rds;
 
 class Bootstrap {
-  public static function getInstace()
+  public static function getInstace($config)
   {
-    $config = Configuration::getInstance();
-    $impl = '\Impl\\' . $config->option("implementation");
+    $impl = '\Impl\\' . $config["app"]["implementation"];
     $implementation = new $impl();
     $cfg = new \Spot\Config();
-    $cfg->addConnection($config->rds("driver"), $config->rds("connectionString"));
+    $cfg->addConnection($config["rds"]["driver"], $config["rds"]["connectionString"]);
     $spot = new \Spot\Locator($cfg);
 
     return new EntitySyncronizer($spot->mapper($implementation->entity()), $implementation);

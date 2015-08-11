@@ -5,34 +5,35 @@ class Configuration {
     private static $instance;
     private $config;
 
-    public function option($opt)
-    {
-      return $this->config->{$opt}->__toString();
-    }
-
-    public function couchbase($opt)
-    {
-      return $this->config->connectionStrings->couchbase->$opt->__toString();
-    }
-
-    public function rds($opt)
-    {
-        return $this->config->connectionStrings->rds->$opt->__toString();
-    }
-
-
-    public static function getInstance()
+    public static function get()
     {
         if (null === static::$instance) {
             static::$instance = new static();
-        }
 
-        return static::$instance;
+        }
+        
+        return static::$instance->config;
     }
 
     protected function __construct()
     {
-      $this->config = simplexml_load_file( __DIR__ . "/../../../../App.config");
+      $xml = simplexml_load_file( __DIR__ . "/../../../../App.config");
+
+      $this->config = [
+        "app" => [
+          "workers" => (int) $xml->workers->__toString(),
+          "implementation" => $xml->implementation->__toString()
+        ],
+        "couchbase" => [
+          "bucket"  => $xml->connectionStrings->couchbase->bucket->__toString(),
+          "connectionString" => $xml->connectionStrings->couchbase->connectionString->__toString()
+        ],
+        "rds" => [
+          "driver" => $xml->connectionStrings->rds->driver->__toString(),
+          "connectionString" => $xml->connectionStrings->rds->connectionString->__toString()
+        ],
+      ];
+
       var_dump("Configuration loaded!");
     }
 

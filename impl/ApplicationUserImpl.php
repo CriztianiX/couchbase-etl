@@ -4,7 +4,7 @@ namespace Impl;
 class ApplicationUserImpl {
   public function limit()
   {
-    return 10;
+    return 150;
   }
 
   public function where()
