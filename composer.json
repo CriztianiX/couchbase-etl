@@ -1,0 +1,17 @@
+{
+  "config": {
+        "bin-dir": "bin",
+        "vendor-dir": "Vendor/"
+    },
+    "require":{
+      "ext-pthreads": ">=2.0.0",
+      "ext-couchbase": ">=2.0.7",
+      "vlucas/spot2": "2.1.6"
+    },
+    "autoload": {
+      "psr-4": {
+        "Impl\\": "impl",
+        "Rds\\": "Vendor/criztianix/rds/lib/"
+      }
+  }
+}
