@@ -1,0 +1,35 @@
+{
+  "development": {
+    "num_workers": 8,
+    "rds": {
+      "driver": "pgsql",
+      "connectionString": "pgsql://user:password@localhost/database"
+    },
+    "couchbase": {
+      "bucket": "default",
+      "connectionString": "http://127.0.0.1:8091"
+    }
+  },
+  "testing": {
+    "num_workers": 8,
+    "rds": {
+      "driver": "pgsql",
+      "connectionString": "pgsql://user:password@localhost/database"
+    },
+    "couchbase": {
+      "bucket": "default",
+      "connectionString": "http://127.0.0.1:8091"
+    }
+  },
+  "production": {
+    "num_workers": 8,
+    "rds": {
+      "driver": "pgsql",
+      "connectionString": "pgsql://user:password@localhost/database"
+    },
+    "couchbase": {
+      "bucket": "default",
+      "connectionString": "http://127.0.0.1:8091"
+    }
+  }
+}
