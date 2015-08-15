@@ -10,7 +10,7 @@ namespace Rds {
     {
       $boot = Bootstrap::getInstace();
       $rows = $boot->getPage($this->page);
-      $bucket = CouchbaseConnection::getBucketConnection();
+      $bucket = \Rds\CouchbaseConnection::getBucketConnection();
 
       foreach ($rows as $row) {
         $adaptedResult = $boot->adaptResult($row);

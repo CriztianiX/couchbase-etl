@@ -1,0 +1,9 @@
+{
+  "name": "couchbase-etl",
+  "version": "0.0.1",
+  "dependencies": {
+    "gulp": "~3.9.0",
+    "xmlpoke": "~0.1.9",
+    "yargs": "~3.15.0"
+  }
+}

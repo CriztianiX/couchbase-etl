@@ -10,7 +10,9 @@ class Main {
 
       if($totalPages>0)
       {
-        $pool = new \Pool((int)$numWorkers, \Rds\Worker::class, ["Vendor/autoload.php"]);
+        $stacks = [ "Vendor/autoload.php" ];
+
+        $pool = new \Pool((int)$numWorkers, \Rds\Worker::class, $stacks);
         for ($page=1; $page <= $totalPages ; $page++) {
           $task = new \Rds\Task($page);
           $pool->submit($task);
