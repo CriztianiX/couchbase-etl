@@ -11,7 +11,6 @@ class Main {
       if($totalPages>0)
       {
         $stacks = [ "Vendor/autoload.php" ];
-
         $pool = new \Pool((int)$numWorkers, \Rds\Worker::class, $stacks);
         for ($page=1; $page <= $totalPages ; $page++) {
           $task = new \Rds\Task($page);
@@ -19,7 +18,8 @@ class Main {
         }
         $pool->shutdown();
         $pool->collect(function($work){
-          return $work->isGarbage();
+          //return $work->isGarbage();
+          return true;
         });
       }
     }

@@ -1,6 +1,6 @@
 <?php
 namespace Rds {
-  class Task extends \Collectable {
+  class Task extends \Threaded {
     public $page;
 
     public function __construct($page) {
@@ -8,9 +8,11 @@ namespace Rds {
     }
     public function run()
     {
+
       $boot = Bootstrap::getInstace();
       $rows = $boot->getPage($this->page);
-      $bucket = \Rds\CouchbaseConnection::getBucketConnection();
+      //$bucket = \Rds\CouchbaseConnection::getBucketConnection();
+      $bucket = $this->worker->getCouchbaseConnection();
 
       foreach ($rows as $row) {
         $adaptedResult = $boot->adaptResult($row);
@@ -23,7 +25,7 @@ namespace Rds {
 
       // Close rdms conection
       $boot->mapper()->connection()->close();
-      return $this->setGarbage();
+      //return $this->setGarbage();
     }
   }
 }
