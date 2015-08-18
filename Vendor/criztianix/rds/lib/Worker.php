@@ -3,7 +3,7 @@
 namespace Rds {
     class Worker extends \Worker {
         protected $loader;
-        protected static $couchbase;
+        protected $couchbase;
 
         public function __construct($loader)
         {
@@ -16,11 +16,11 @@ namespace Rds {
 
         public function getCouchbaseConnection()
         {
-          if (!self::$couchbase) {
-            self::$couchbase = \Rds\CouchbaseConnection::getBucketConnection();
+          if (!$this->couchbase) {
+            $this->couchbase = CouchbaseConnection::getBucketConnection();
           }
 
-          return self::$couchbase;
+          return $this->couchbase;
         }
 
         public function start()

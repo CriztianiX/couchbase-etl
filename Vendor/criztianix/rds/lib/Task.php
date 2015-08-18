@@ -14,18 +14,20 @@ namespace Rds {
       //$bucket = \Rds\CouchbaseConnection::getBucketConnection();
       $bucket = $this->worker->getCouchbaseConnection();
 
-      foreach ($rows as $row) {
-        $adaptedResult = $boot->adaptResult($row);
-        try {
-          $res = $bucket->upsert((string)$row->id, json_encode($adaptedResult));
-        } catch (Exception $e) {
-          var_dump($e->getMessage());
+      if(is_object($bucket)and get_class($bucket) === 'CouchbaseBucket') {
+        foreach ($rows as $row) {
+          $adaptedResult = $boot->adaptResult($row);
+          try {
+            $res = $bucket->upsert((string)$row->id, json_encode($adaptedResult));
+          } catch (Exception $e) {
+            var_dump($e->getMessage());
+          }
         }
-      }
 
-      // Close rdms conection
-      $boot->mapper()->connection()->close();
-      //return $this->setGarbage();
+        // Close rdms conection
+        $boot->mapper()->connection()->close();
+        //return $this->setGarbage();
+      }
     }
   }
 }
