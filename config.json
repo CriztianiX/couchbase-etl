@@ -1,6 +1,7 @@
 {
   "development": {
     "num_workers": 8,
+    "implementation": "ApplicationUserImpl",
     "rds": {
       "driver": "pgsql",
       "connectionString": "pgsql://user:password@localhost/database"
@@ -12,6 +13,7 @@
   },
   "testing": {
     "num_workers": 8,
+    "implementation": "ApplicationUserImpl",
     "rds": {
       "driver": "pgsql",
       "connectionString": "pgsql://user:password@localhost/database"
@@ -23,6 +25,7 @@
   },
   "production": {
     "num_workers": 8,
+    "implementation": "ApplicationUserImpl",
     "rds": {
       "driver": "pgsql",
       "connectionString": "pgsql://user:password@localhost/database"
