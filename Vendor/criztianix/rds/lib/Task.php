@@ -10,13 +10,15 @@ namespace Rds {
     {
       $config = $this->worker->config;
       $boot = Bootstrap::getInstace($config);
-      $rows = $boot->getPage($this->page);
-      $bucket = \Rds\CouchbaseConnection::getBucketConnection($config["couchbase"]);
+      $bucket = $this->worker->bucket;
 
+      $rows = $boot->getPage($this->page);
       foreach ($rows as $row) {
         $adaptedResult = $boot->adaptResult($row);
         try {
-          $res = $bucket->upsert((string)$row->id, json_encode($adaptedResult));
+          $key = (string)$row->id;
+          $value = json_encode($adaptedResult);
+          $res = $bucket->upsert($config["couchbase"], $key, $value);
         } catch (Exception $e) {
           var_dump($e->getMessage());
         }

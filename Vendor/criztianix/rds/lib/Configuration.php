@@ -11,7 +11,7 @@ class Configuration {
             static::$instance = new static();
 
         }
-        
+
         return static::$instance->config;
     }
 

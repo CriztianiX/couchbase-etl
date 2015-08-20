@@ -1,4 +1,5 @@
 Vendor/*
+!Vendor/criztianix
 node_modules
 bin/
 composer.phar
